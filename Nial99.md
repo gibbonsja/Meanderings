@@ -155,17 +155,15 @@ Pack consecutive duplicates of list elements into sublists.
     ,"d"
     "eeee")
  
-
-### K Solution
- 
     pack: {(&1,~=':x)_ x}
 
 ### Nial Solution
 
-    pack is runs               
+    pack is runs          
  
 
 ## Problem 10
+
 Run-length encoding of a list.
 
 ### Example
@@ -179,11 +177,7 @@ Run-length encoding of a list.
     (4;"e"))
  
 
-### K Solution
- 
-    encode: {(#:'a),'*:'a:pack x}
-
-### Nial Solution
+### Solution
 
     encode is each [tally, first] runs
  
@@ -209,25 +203,26 @@ Modified run-length encoding.
  
 ### Nial Solution
 
-    encodemod is 
+    encodemod is each (op x (if 1 = tally x then x else [tally,first] x end)) runs 
 
 ## Problem 12
+
 Decode a run-length encoded list.
 
 ### Example
  
-  decodemod ((4;"a");"b";(2;"c");(2;"a");"d";(4;"e"))
-"aaaabccaadeeee"
+    decodemod ((4;"a");"b";(2;"c");(2;"a");"d";(4;"e"))
+    "aaaabccaadeeee"
  
 
 ### Solution
  
-decodemod: ,/{:[2=#x;(*x)#x@1;x]}'
-decodemod2: ,/#/'
+    decodemod is link each (op x (if 2 = tally x then reshape x else x end)
  
 
 ## Problem 13
-Run-length encoding of a list (direct solution).<br />
+
+Run-length encoding of a list (direct solution).
 Don't explicitly create the sublists containing the duplicates, only count them.
 
 ### Example
