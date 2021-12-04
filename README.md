@@ -1,1 +1,3 @@
 # Meanderings
+
+Pieces of code
