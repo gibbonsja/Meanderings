@@ -13,7 +13,7 @@ It is released
 under a GPL3 licence. For details go to [Nial Website](https://nial-array-language.org).
 
 There is also an evolving Web Assembly version available
-at [Nial WASM](https://niallang.github.io/Nial_WASM).
+at [Nial WASM](https://niallang.github.io/NIAL_WASM).
 
 
 
