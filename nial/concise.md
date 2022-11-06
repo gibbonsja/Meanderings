@@ -42,7 +42,7 @@ The available data types are
 
 Homogeneous arrays of type boolean, integer, real, and character are packed for efficiency.
  
-# Scope
+# Scope and Role
  
 Nial has a global scope as well nested local scopes. Every identifier
 in Nial exists within a scope and has a role (related to parsing) and a behaviour (related 
@@ -59,6 +59,27 @@ The role is one of
 - expression
 - operation (behaviour is a function)
 - transformer (behaviour is a form of higher order function) 
+
+Builtin variables, operators and transformers have their role defined during initialisation. Identifiers that are not builtin are associated with a role during their definition which takes the form
+
+    <identifier> IS <expression|operation|transformer>
+
+or for a variable role
+
+    <identifier> := <expression>
+    local <identifier>
+    nonlocal <identifier>
+
+Please note that in the fragment
+
+    x := 10
+    a := 1 + x     
+    b is (1+x)   
+
+a is now a variable with value 21 and will stay that way until reassigned however b
+is an expression referencing x,  evaluating b at some point in a program will give a value
+depending on the current value of x at that point.
+ 
  
 # Expressions and Strands
  
@@ -73,13 +94,17 @@ Expressions (*exp*) can be broken down into groups
  
 ## Primary Expressions (*pexp*)
  
-    var                                  value of a variable
-    named-expr                           evaluation of a named expression
-    (exp)                                parenthesised expression
-    int, real, bool, char
-    [exp,...]                            vector
-    !x                                   cast
+    var                                    value of a variable
+    named-expr                             evaluation of a named expression
+    (exp)                                  parenthesised expression
+    int, real, bool, char, phrase, string, fault
+    [exp,...]                              vector
+    !x                                     cast
+    {local x; nonlocal y; exp...}          block expression
+    begin local x; nonlocal y; exp.. end   another form of block expression
  
+Block expressions create a local context and allow for *local* and *nonlocal* variable declarations.
+
 When the Nial parser is looking for an expression and encounters a primary expression it will
 attempt to form the longest possible strand, a sequence of primary expressions separated by spaces.
 
@@ -87,16 +112,25 @@ For example
  
     1 2 (3*4) pi (if this_works then 'Hooray' else 'Crap' end) 
  
-and is identical to the vector 
+which is identical to the vector 
  
     [1,2,3*4,pi, *Hooray" or "Crap*]
+
+Strand formation also takes precedence over operator application
+
+    reverse 1 2 3 begin local t; t := 5; t*2 end 66
+
+returns
+ 
+    66 10 3 2 1
 	
  
  
-## Operation Application (*op-exp*)
+## Operator Application (*op-exp*)
  
     opn x                                operator application
     x := y                               assignment, same as: x gets y
+    x y z := v                           multiple value assignment
     x opn y                              by convention this is opn[x,y]
     opn strand                           strand is the single arg
     [opn1,opn2,...]                      an alas x [opn1 x, opn2 x, ...]
@@ -128,21 +162,31 @@ operate on the array of results of their children.
     repeat exp-seq until exp end
     case exp from const: exp-seq end ... else exp-seq end
 
-**Block Expressions**
-
-Block expressions create a local context and allow for *local* and *nonlocal* variable declarations.
-
-    { local x y; nonlocal u v; exp-seq }
-    begin local x..; nonlocal u..; exp-seq end
-
-
-## Operators and Transformers
+# Operators
 
 Nial has a large number of builtin operators for 
 - creating and manipulating arrays (shape,
   reshape, transpose, lower, raise etc), 
 - maths (+, -, /, reciprocal etc)
 - I/O
+
+Operators can also be created in Nial via a lambda form, a composition of existing operators, 
+by application of a transformer by currying another operator or by an atlas of operators.
+
+A Lambda Form (or DFN) takes the form
+
+    op x { exp... }                 an operator with one argument
+    op x y .. { exp... }            an operator with multiple arguments but not really
+
+Currying takes the form
+
+    exp fn
+
+Application of a transformer is simply
+
+    trf fn
+
+where fn is a single operator.
  
 If you look at Nial operators as taking 1 argument with no
 preconceptions of monadic or dyadic and x, y etc are single expressions
@@ -161,26 +205,11 @@ or
 
     valence reshape [pass, tell *] 2 3 4 5 6
 
-This is just function composition in a tacit form.
+This is just function composition in a pseudo tacit form.
 
-Nial doesn't have conventions on verb trains such as the 'fork', its
-functional and doesn't need them. Just write *f[g,h]*, a composition
+Nial doesn't have  conventions on verb trains such as APL's 'fork', its
+functional, has atlases, and doesn't need them. Just write *f[g,h]*, a composition
 of two functions for the fork.
-
-If you want to formalise this Nial has a form of HOF called a transformer so
-in a tacit style you can write
-
-  fork is tr f g h (f[g,h])
-
-then you can write
-
-     average is fork [/,+,tally]
-
-If you prefer a non-tacit style then you can write
-
-   fork is tr f g h op x { (g x) f (h x) }
-
-OP is Nial's lambda.
 
 Nial has multiple assignment
 
@@ -194,24 +223,41 @@ or as
 
   op args { x y z := args; ... }
 
-The interpreter will handle the first form more efficiently.
+If you specify multiple arguments in a definition then you must provide a vector with exactly 
+that many elements when applying the operator. Specifying a single argument allows you to pass
+a vector with as many elements as you like.
 
 
-## Gotchas
+# Transformers
 
-IS is not the same as := (gets). One is a definition, the other
-an assignment. For example
+Nial has a class of 2nd order functions called transformers. 
 
-  x := 10
+A transformer takes a single operator as argument and produces another operator.  
 
-  a := 1 + x     
-  b is (1+x)   
+There are a number of builtin transformers and transformers can be defined in Nial with the form
+
+    tr f <operator-specification>
+    tr f g h ... <operator-specification>
+
+Note that in the 2nd form, application of the transformer will require an atlas of the same size as the 
+number of operators mentioned in the definition.
+
+The <operator-expression> above can be any form of operation, a DFN, a composition of functions, 
+an atlas or a currying.
+
+For example to define fork as a transformer you can write in a tacit style
+
+    fork is tr f g h (f[g,h])
+
+then you can write
+
+     average is fork [/,+,tally]
+
+If you prefer a non-tacit style then you can write
+
+   fork is tr f g h op x { (g x) f (h x) }
 
 
-a is now 21 and will stay that way until reassigned however b
-is 1+x whatever x is and if x changes then evaluating b will too.
 
-
-  
 
 
