@@ -15,7 +15,9 @@ under a GPL3 licence. For details go to [Nial Website](https://nial-array-langua
 There is also an evolving Web Assembly version available
 at [Nial WASM](https://niallang.github.io/NIAL_WASM).
 
-Some [simple examples of Nial](nial/examples.md)
+## Nial Content
+
+- Some [simple examples of Nial](nial/examples.md)
 
 
     
