@@ -74,45 +74,66 @@ Expressions (*exp*) can be broken down into groups
 ## Primary Expressions (*pexp*)
  
     var                                  value of a variable
-	named-expr                           evaluation of a named expression
-	(exp)                                parenthesised expression
-	int, real, bool, char
-	[exp,...]                            vector
+    named-expr                           evaluation of a named expression
+    (exp)                                parenthesised expression
+    int, real, bool, char
+    [exp,...]                            vector
+    !x                                   cast
  
-When parsing a string of tokens a sequence of primary expressions separated by spaces is 
-called a strand e.g.
+When the Nial parser is looking for an expression and encounters a primary expression it will
+attempt to form the longest possible strand, a sequence of primary expressions separated by spaces.
+
+For example
  
     1 2 (3*4) pi (if this_works then 'Hooray' else 'Crap' end) 
  
 and is identical to the vector 
  
-    [1,2,3*4,pi, *Hooray or Crap*]
+    [1,2,3*4,pi, *Hooray" or "Crap*]
 	
-When the Nial parser is looking for an expression and encounters a primary expression it will
-attempt to form the longest strand possible. 
  
-## Operation Application (*op-exp)
+ 
+## Operation Application (*op-exp*)
  
     opn x                                operator application
-	x := y                               assignment, same as: x gets y
+    x := y                               assignment, same as: x gets y
     x opn y                              by convention this is opn[x,y]
     opn strand                           strand is the single arg
     [opn1,opn2,...]                      an alas x [opn1 x, opn2 x, ...]
 
+an atlas is by itself is an operation and so can be nested in another atlas. The behaviour of a nested
+atlas can be easily understood by viewing it as a tree of operations. 
+
+For example 
+
+    f[g,h,k[m,n]] x
+
+can be viewed as the tree of operators
+
+           f
+         / | \
+        g  h  k
+             / \
+            m   n
+
+and when applied, leaf nodes operate directly on the argument x and interior nodes
+operate on the array of results of their children.
+
+
 ## Control Expressions
 
     if exp then esp-seq elseif exp then exp-seq else exp-seq end
-	for var with exp do exp-seq end
-	while exp do exp-seq end
-	repeat exp-seq until exp end
-	case exp from const: exp-seq end ... else exp-seq end
+    for var with exp do exp-seq end
+    while exp do exp-seq end
+    repeat exp-seq until exp end
+    case exp from const: exp-seq end ... else exp-seq end
 
 **Block Expressions**
 
 Block expressions create a local context and allow for *local* and *nonlocal* variable declarations.
 
     { local x y; nonlocal u v; exp-seq }
-	begin local x..; nonlocal u..; exp-seq end
+    begin local x..; nonlocal u..; exp-seq end
 
 
 ## Operators and Transformers
@@ -142,22 +163,22 @@ or
 
 This is just function composition in a tacit form.
 
-Nial doesn't have conventions on verb trains such as the 'hook', its
+Nial doesn't have conventions on verb trains such as the 'fork', its
 functional and doesn't need them. Just write *f[g,h]*, a composition
-of two functions for the hook.
+of two functions for the fork.
 
 If you want to formalise this Nial has a form of HOF called a transformer so
 in a tacit style you can write
 
-  hook is tr f g h (f[g,h])
+  fork is tr f g h (f[g,h])
 
 then you can write
 
-     average is hook [/,+,tally]
+     average is fork [/,+,tally]
 
 If you prefer a non-tacit style then you can write
 
-   hook is tr f g h op x { (g x) f (h x) }
+   fork is tr f g h op x { (g x) f (h x) }
 
 OP is Nial's lambda.
 
