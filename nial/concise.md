@@ -71,12 +71,12 @@ The role is one of
 - keyword: if, while, repeat, etc (role is fixed across all scopes)
 - variable: abc, _def
 - expression
-- operation (behaviour is a function)
+- operator (behaviour is a function)
 - transformer (behaviour is a form of higher order function) 
 
 Builtin variables, operators and transformers have their role defined during initialisation. Identifiers that are not builtin are associated with a role during their definition which takes the form
 
-    <identifier> IS <expression|operation|transformer>
+    <identifier> IS <expression|operator|transformer>
 
 or for a variable role
 
@@ -149,7 +149,7 @@ returns
     [opn1,opn2,...]                      an alas x [opn1 x, opn2 x, ...]
 
 An atlas is by itself is an operator and so can be nested in another atlas. The behaviour of a nested
-atlas can be easily understood by viewing it as a tree of operations. 
+atlas can be easily understood by viewing it as a tree of operators. 
 
 For example 
 
@@ -207,7 +207,7 @@ Application of a transformer is simply
 
     trf fn
 
-where fn is a single operator (which may be an atlas) and trf is a tramsformer.
+where fn is a single operator (which may be an atlas) and trf is a transformer.
  
 Nial operators in evaluation take 1 argument and have no distinctions between monadic or dyadic. If x and y etc are single expressions
 or strands of expressions then
@@ -251,9 +251,9 @@ a vector with as many elements as you like.
 
 Some builin operators in Nial have a property called *pervasive* (unary, binary or multi).
 
-A unary pervasive operation maps maps an array to another array with identical
+A unary pervasive operator maps maps an array to another array with identical
 structure, mapping each atom by the functions behaviour on atoms. All of the 
-scientific operations and the unary operations of arithmetic and logic are unary
+scientific operators and the unary operators of arithmetic and logic are unary
 pervasive.
 
     sin (2 3 reshape tell 6)
@@ -261,7 +261,7 @@ pervasive.
          0.  0.841471  0.909297
     0.14112 -0.756802 -0.958924
 
-A binary pervasive operation maps two array having identical structure to one
+A binary pervasive operator maps two array having identical structure to one
 with the same structure, mapping each pair of corresponding atoms by the 
 functions behaviour on the corresponding pairs of atoms. The binary
 operators of arithmetic and logic are binary-pervasive
@@ -274,10 +274,10 @@ operators of arithmetic and logic are binary-pervasive
          0.4 0.454545      0.5
      
 
-A multi-pervasive operation maps an array having items of identical structure
-to one of the the same structure, applying the operation to the simple arrays
+A multi-pervasive operator maps an array having items of identical structure
+to one of the the same structure, applying the operator to the simple arrays
 formed from all the atoms in corresponding positions in the items. The 
-operations in this group are the reductive operations of arithmetic and logic 
+operators in this group are the reductive operators of arithmetic and logic 
 (and, or, max, min, product & sum).
 
     x := 2 3 4 reshape tell 24
@@ -350,7 +350,7 @@ There are a number of builtin transformers and transformers can be defined in Ni
 Note that in the 2nd form, application of the transformer will require an atlas of the same size as the 
 number of operators mentioned in the definition.
 
-The \<operator-expression\> above can be any form of operation, a DFN, a composition of functions, 
+The \<operator-expression\> above can be any form of operator, a DFN, a composition of functions, 
 an atlas or a currying.
 
 For example to define fork as a transformer you can write in a tacit style
