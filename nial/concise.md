@@ -1,16 +1,24 @@
 # Condensed Nial
 
-The following is my personal interpretation of Nial, take it as you will.
+The following is my personal interpretation of Nial.
 
 Nial borrows from Lisp and Functional programming and combines
 that with a data model of nested arrays. It is the product of early work
 in the array language community.
 
+## Terms
+
+Throughout this document the terms *operator* and *function* will be used interchangeably.
+
+Nial is expression oriented and *operator* relates more to the syntax of expressions while
+*function* relates to the execution of expressions.
+
+
 ## Nial vs APL
 
 Nial differs from APL etc in that it uses the standard ascii character set for 
 programming, does not have distinct monadic and dyadic interpretations for
-an operator and does not have special verb train interpretations.
+an operator and does not have special verb train conventions.
 
 In Nial an operator can be used in either an infix form (x opn y)
 or a prefix form (opn x) and has the same behaviour in both contexts with
@@ -21,6 +29,12 @@ the infix form being just 'opn [x,y]'.
 is the same as 
 
 	reshape [2 3 4, tell 60]
+
+Verb train conventions are repleced by higher order functions and vectors of
+functions.
+
+Nial expressions are evaluated left to right while APL is right to left.
+
 
 More on parsing and precedence/binding-power of operators later.
 
@@ -170,8 +184,13 @@ Nial has a large number of builtin operators for
 - maths (+, -, /, reciprocal etc)
 - I/O
 
-Operators can also be created in Nial via a lambda form, a composition of existing operators, 
-by application of a transformer by currying another operator or by an atlas of operators.
+Operators can also be created in Nial via 
+
+- a lambda form
+- a composition of existing operators 
+- by application of a transformer 
+- by currying another operator 
+- by an atlas of operators.
 
 A Lambda Form (or DFN) takes the form
 
@@ -226,6 +245,92 @@ or as
 If you specify multiple arguments in a definition then you must provide a vector with exactly 
 that many elements when applying the operator. Specifying a single argument allows you to pass
 a vector with as many elements as you like.
+
+## Pervasiveness
+
+Some builin operators in Nial have a property called *pervasive* (unary, binary or multi).
+
+A unary pervasive operation maps maps an array to another array with identical
+structure, mapping each atom by the functions behaviour on atoms. All of the 
+scientific operations and the unary operations of arithmetic and logic are unary
+pervasive.
+
+    sin (2 3 reshape tell 6)
+    
+         0.  0.841471  0.909297
+    0.14112 -0.756802 -0.958924
+
+A binary pervasive operation maps two array having identical structure to one
+with the same structure, mapping each pair of corresponding atoms by the 
+functions behaviour on the corresponding pairs of atoms. Binary of the binary
+ operations of arithmetic and logic are binary-pervasive
+
+    x := 2 3 reshape 1 2 3 5 6;
+    y := 2 3 reshape 7 8 9 10 11 12;
+    x/y
+
+    0.142857     0.25 0.333333
+         0.4 0.454545      0.5
+     
+
+A multi-pervasive operation maps an array having items of identical structure
+to one of the the same structure, applying the operation to the simple arrays
+formed from all the atoms in corresponding positions in the items. The 
+operations in this group are the reductive operations of arithmetic and logic 
+(and, or, max, min, product & sum).
+
+    x := 2 3 4 reshape tell 24
+    
+    0 1  2  3   12 13 14 15
+    4 5  6  7   16 17 18 19
+    8 9 10 11   20 21 22 23
+    
+    +x
+    
+    276
+
+    y := 2 raise x
+    
+    +-----------+-----------+-----------+
+    |0 1 2 3    |4 5 6 7    |8 9 10 11  |
+    +-----------+-----------+-----------+
+    |12 13 14 15|16 17 18 19|20 21 22 23|
+    +-----------+-----------+-----------+
+     
+    +y
+    
+    60 66 72 78
+
+## Parsing an Operator Expression
+
+Nial parses and evaluates left to right and all operators in Nial have the same left 
+binding power and the same right binding power, however
+the right binding power is stronger than the left. So
+
+    2 - 4 * 6
+
+will be treated as 
+
+    (2 - 4) * 6
+
+and return -12 as will the prefix version of -
+
+    -[2,4]*6
+
+As per the old saying, when in doubt use parentheses.
+
+Transformers always bind to the single operator on their right. If you want that to be a function
+composition use parentheses.
+
+As stated above strand formation takes precedence over operator evaluation. So
+
+    1 2 3 - 4 5 6 * 7 8 9  
+
+returns 
+
+    -21 -24 -27
+
+
 
 
 # Transformers
