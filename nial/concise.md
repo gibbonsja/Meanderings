@@ -146,10 +146,9 @@ returns
     x := y                               assignment, same as: x gets y
     x y z := v                           multiple value assignment
     x opn y                              by convention this is opn[x,y]
-    opn strand                           strand is the single arg
     [opn1,opn2,...]                      an alas x [opn1 x, opn2 x, ...]
 
-an atlas is by itself is an operation and so can be nested in another atlas. The behaviour of a nested
+An atlas is by itself is an operator and so can be nested in another atlas. The behaviour of a nested
 atlas can be easily understood by viewing it as a tree of operations. 
 
 For example 
@@ -175,6 +174,9 @@ operate on the array of results of their children.
     while exp do exp-seq end
     repeat exp-seq until exp end
     case exp from const: exp-seq end ... else exp-seq end
+
+Please note that Nial also has *endif*, *endwhile*, *endfor*, *endrepeat* and
+*endcase* if you prefer that syntax.
 
 # Operators
 
@@ -205,10 +207,9 @@ Application of a transformer is simply
 
     trf fn
 
-where fn is a single operator.
+where fn is a single operator (which may be an atlas) and trf is a tramsformer.
  
-If you look at Nial operators as taking 1 argument with no
-preconceptions of monadic or dyadic and x, y etc are single expressions
+Nial operators in evaluation take 1 argument and have no distinctions between monadic or dyadic. If x and y etc are single expressions
 or strands of expressions then
 
     x fn y -is- f [x;y]                  by convention
@@ -262,8 +263,8 @@ pervasive.
 
 A binary pervasive operation maps two array having identical structure to one
 with the same structure, mapping each pair of corresponding atoms by the 
-functions behaviour on the corresponding pairs of atoms. Binary of the binary
- operations of arithmetic and logic are binary-pervasive
+functions behaviour on the corresponding pairs of atoms. The binary
+operators of arithmetic and logic are binary-pervasive
 
     x := 2 3 reshape 1 2 3 5 6;
     y := 2 3 reshape 7 8 9 10 11 12;
@@ -288,6 +289,8 @@ operations in this group are the reductive operations of arithmetic and logic
     +x
     
     276
+
+Converting x to a 2x3 array of 4 element vectors
 
     y := 2 raise x
     
@@ -335,7 +338,7 @@ returns
 
 # Transformers
 
-Nial has a class of 2nd order functions called transformers. 
+Nial has a class of 2nd order functions called transformers which take only operators as arguments. 
 
 A transformer takes a single operator as argument and produces another operator.  
 
@@ -347,7 +350,7 @@ There are a number of builtin transformers and transformers can be defined in Ni
 Note that in the 2nd form, application of the transformer will require an atlas of the same size as the 
 number of operators mentioned in the definition.
 
-The <operator-expression> above can be any form of operation, a DFN, a composition of functions, 
+The \<operator-expression\> above can be any form of operation, a DFN, a composition of functions, 
 an atlas or a currying.
 
 For example to define fork as a transformer you can write in a tacit style
