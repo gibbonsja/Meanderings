@@ -49,7 +49,7 @@ The available data types are
 - boolean: l (true), o (false), lol (packed array of 3 bools)
 - integer: 123, -456 (64 or 32 bits depending on implementation) 
 - real: 3.14159, 2.34e10 (64 bit double) 
-- character: \`a, \`|, char 10 (8 bit), 'strings are arrays'
+- character: \`a, char 10 (8 bit), 'strings are arrays'
 - phrase: "abc, "_123 (symbols, not identifiers)
 - fault: ?no_way, ??way  (exceptions)
 - array: [1,2,3,4], 1 2 3 4 (strand form), [1, "abc, 3 4 5, [5.33]]
