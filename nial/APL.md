@@ -1,11 +1,18 @@
 
 Some translations of APL into Nial
 
+Note that different APLs have some different interpretations of the functions.
+There is also a level of polymorphism in arguments for both monadic and dyadic
+usages.
+
 # Matching Verbs
 
-| Glyph | Usage | APL Name | Nial |
-| ---------- | -------------- |---------------- | ------------- |
-| ⍳  | Monadic | iota(index) | *tell* (0 origin), *count* (1 origin)  |
+## ⍳ (Iota)
+
+###  Monadic
+
+- *tell* for 0 origin indexing
+- *count* for 1 origin indexing
 
 
 
