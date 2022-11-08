@@ -14,5 +14,9 @@ index of the item then it is the first occurence.
 
 Using *eachboth =* we get a boolean mask for sublist to extract those items.
 
+We can turn this into an operator with
 
+    remdup is op v {
+      ((v eachleft find v) eachboth = tell tally v) sublist v
+    }
 
