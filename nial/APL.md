@@ -1,6 +1,14 @@
 
 Some translations of APL into Nial
 
+# Matching Verbs
+
+| Glyph | Usage | APL Name | Nial |
+| ---------- | -------------- |---------------- | ------------- |
+| &#03B9  | Monadic | iota | count  |
+
+
+
 # Common Verb Trains
 
 | Name | APL Form | APL Meaning | Nial |
