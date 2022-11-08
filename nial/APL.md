@@ -5,7 +5,7 @@ Some translations of APL into Nial
 
 | Glyph | Usage | APL Name | Nial |
 | ---------- | -------------- |---------------- | ------------- |
-| ⍳  | Monadic | iota | count  |
+| ⍳  | Monadic | iota(index) | *tell* (0 origin), *count* (1 origin)  |
 
 
 
