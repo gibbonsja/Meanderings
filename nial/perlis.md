@@ -5,5 +5,5 @@
 
 If v is a list of elements find the unique elements.
 
-    ((v eachleft find v) each = tell tally v) sublist v
+    ((v eachleft find v) eachboth = tell tally v) sublist v
 
