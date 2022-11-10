@@ -2,9 +2,9 @@
 title: Condensed Nial
 ---
 
-The following is my personal interpretation of Nial. I have tried to ondense
+The following is my personal interpretation of Nial. I have tried to condense
 the Nial documentation into a short form to allow programmers to get started
-in Nial as qickly as possible.
+in Nial as quickly as possible.
 
 Use this document in conjunction with
 the [Nial Dictionary](https://nial-array-language.org/ndocs/NialDict2.html) 
@@ -12,19 +12,19 @@ the [Nial Dictionary](https://nial-array-language.org/ndocs/NialDict2.html)
 # Table of Contents
 
 1. [Background](#background)
-   - [Terminology](terminology)
-   - [Nial vs APL](nial-vs-apl)
+   - [Terminology](#terminology)
+   - [Nial vs APL](#nial-vs-apl)
 2. [Arrays and Data Types](#arrays-and-data-types)
 3. [Scope and Role](#scope-and-role)
 4. [Expressions and Strands](#expressions-and-strands)
-   - [Primary Expressions](primary-expressions)
-   - [Operator Application](operator-application)
-   - [Control Expressions](control-expressions)
-   - [Parsing an Expression](parsing-an-expression)
+   - [Primary Expressions](#primary-expressions)
+   - [Operator Application](#operator-application)
+   - [Control Expressions](#control-expressions)
+   - [Parsing an Expression](#parsing-an-expression)
 5. [Operators](#operators)
-   - [Pervasiveness](pervasiveness)
+   - [Pervasiveness](#pervasiveness)
 7. [Transformers](#transformers)
-8. [Using the Interpreter](using-the-interpreter)
+8. [Using the Interpreter](#using-the-interpreter)
 
 
 
@@ -125,7 +125,7 @@ or for a variable role
     local <identifier>
     nonlocal <identifier>
 
-Please note that in the fragment
+Please note the distinction between *:=* and *is* in the fragment
 
     x := 10
     a := 1 + x     
@@ -192,7 +192,7 @@ returns
     x opn y                              by convention this is opn[x,y]
     [opn1,opn2,...] x                    an atlas with value [opn1 x, opn2 x, ...]
 
-An atlas is by itself is an operator and so can be nested in another atlas. The behaviour 
+An atlas isin itself an operator and so can be nested in another atlas. The behaviour 
 of a nested atlas can be easily understood by viewing it as a tree of operators. 
 
 For example 
