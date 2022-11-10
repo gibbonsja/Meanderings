@@ -24,8 +24,9 @@ the [Nial Dictionary](https://nial-array-language.org/ndocs/NialDict2.html)
 5. [Operators](#operators)
    - [Pervasiveness](#pervasiveness)
 7. [Transformers](#transformers)
-8. [Using the Interpreter](#using-the-interpreter)
-
+8. [Examples](#examples)
+   - [Curious Casts](curious-casts)
+   
 
 
 # Background
@@ -425,7 +426,11 @@ If you prefer a non-tacit style then you can write
 
    fork is tr f g h op x { (g x) f (h x) }
 
-# Using the Interpreter
+# Examples
+
+## Curious Casts
+
+
 
 
 
