@@ -10,11 +10,17 @@ in Nial as qickly as possible.
 # Table of Contents
 
 1. [Background](#background)
-   - [Terms](terms) 
+   - [Terminology](terminology)
+   - [Nial vs APL](nial-vs-apl)
 2. [Arrays](#arrays)
 3. [Scope and Role](#scope-and-role)
 4. [Expressions and Strands](#expressions-and-strands)
+   - [Primary Expressions](primary-expressions)
+   - [Operator Application](operator-application)
+   - [Control Expressions](control-expressions)
 5. [Operators](#operators)
+   - [Pervasiveness](pervasiveness)
+   - [Parsing an Operator Expression](parsing-an-operator-expression)
 7. [Transformers](#transformers)
 8. [Using the Interpreter](using-the-interpreter)
 
@@ -29,7 +35,7 @@ Nial borrows from Lisp and Functional programming and combines
 that with a data model of nested arrays. It was created by Michael Jenkins (Queens University
 Toronto) is collaboration with Trenchard More based on More's (IBM) work on Array Theory.
 
-## Terms
+## Terminology
 
 Throughout this document the terms *operator* and *function* will be used interchangeably.
 
@@ -139,8 +145,10 @@ unless it is terminated by ';' in which case it is the fault *?noexpr*.
  
 Expressions (*exp*) can be broken down into groups
  
-## Primary Expressions (*pexp*)
+## Primary Expression
  
+The following are primary expressions and can be used in strand formation
+
     var                                    value of a variable
     named-expr                             evaluation of a named expression
     (exp)                                  parenthesised expression
