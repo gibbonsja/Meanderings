@@ -25,7 +25,7 @@ the [Nial Dictionary](https://nial-array-language.org/ndocs/NialDict2.html)
    - [Pervasiveness](#pervasiveness)
 7. [Transformers](#transformers)
 8. [Examples](#examples)
-   - [Curious Casts](curious-casts)
+   - [Curious Casts](#curious-casts)
    
 
 
