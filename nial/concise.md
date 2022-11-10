@@ -6,21 +6,23 @@ The following is my personal interpretation of Nial. I have tried to ondense
 the Nial documentation into a short form to allow programmers to get started
 in Nial as qickly as possible.
 
+Use this document in conjunction with
+the [Nial Dictionary](https://nial-array-language.org/ndocs/NialDict2.html) 
 
 # Table of Contents
 
 1. [Background](#background)
    - [Terminology](terminology)
    - [Nial vs APL](nial-vs-apl)
-2. [Arrays](#arrays)
+2. [Arrays and Data Types](#arrays-and-data-types)
 3. [Scope and Role](#scope-and-role)
 4. [Expressions and Strands](#expressions-and-strands)
    - [Primary Expressions](primary-expressions)
    - [Operator Application](operator-application)
    - [Control Expressions](control-expressions)
+   - [Parsing an Expression](parsing-an-expression)
 5. [Operators](#operators)
    - [Pervasiveness](pervasiveness)
-   - [Parsing an Operator Expression](parsing-an-operator-expression)
 7. [Transformers](#transformers)
 8. [Using the Interpreter](using-the-interpreter)
 
@@ -75,7 +77,7 @@ Nial expressions are evaluated left to right while APL is right to left.
 
 More on parsing and precedence/binding-power of operators later.
 
-# Arrays
+# Arrays and Data Types
  
 Arrays have type, dimension/valence, and shape. Dimension 0 objects
 are scalars, dimension 1 are lists/vectors, higher dimensional arrays
@@ -220,6 +222,36 @@ operate on the array of results of their children.
 Please note that Nial also has *endif*, *endwhile*, *endfor*, *endrepeat* and
 *endcase* if you prefer that syntax.
 
+## Parsing an Expression
+
+Nial parses and evaluates left to right and all operators in Nial have the same left 
+binding power and the same right binding power, however
+the right binding power is stronger than the left. So
+
+    2 - 4 * 6
+
+will be treated as 
+
+    (2 - 4) * 6
+
+and return -12 as will the prefix version of -
+
+    -[2,4]*6
+
+As per the old saying, when in doubt use parentheses.
+
+Transformers always bind to the single operator on their right. If you want that 
+to be a composition of functions use parentheses.
+
+As stated above strand formation takes precedence over operator precedence. So
+
+    1 2 3 - 4 5 6 * 7 8 9  
+
+returns 
+
+    -21 -24 -27
+
+
 # Operators
 
 Nial has a large number of builtin operators for 
@@ -358,36 +390,6 @@ Converting x to a 2x3 array of 4 element vectors
 There is a collection of common transformers that allow you to replicate and mix and match 
 these behaviours with operators (*each*, *eachboth*, *reduce*) along with other 
 behaviours (*eachleft*, *eachright* etc).
-
-
-## Parsing an Operator Expression
-
-Nial parses and evaluates left to right and all operators in Nial have the same left 
-binding power and the same right binding power, however
-the right binding power is stronger than the left. So
-
-    2 - 4 * 6
-
-will be treated as 
-
-    (2 - 4) * 6
-
-and return -12 as will the prefix version of -
-
-    -[2,4]*6
-
-As per the old saying, when in doubt use parentheses.
-
-Transformers always bind to the single operator on their right. If you want that 
-to be a composition of functions use parentheses.
-
-As stated above strand formation takes precedence over operator precedence. So
-
-    1 2 3 - 4 5 6 * 7 8 9  
-
-returns 
-
-    -21 -24 -27
 
 
 
