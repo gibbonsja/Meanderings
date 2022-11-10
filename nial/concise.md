@@ -10,7 +10,7 @@ in Nial as qickly as possible.
 # Table of Contents
 
 1. [Background](#background)
-  1. Terms
+   - [Terms](terms) 
 2. [Arrays](#arrays)
 3. [Scope and Role](#scope-and-role)
 4. [Expressions and Strands](#expressions-and-strands)
