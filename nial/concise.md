@@ -147,7 +147,7 @@ unless it is terminated by ';' in which case it is the fault *?noexpr*.
  
 Expressions (*exp*) can be broken down into groups
  
-## Primary Expression
+## Primary Expressions
  
 The following are primary expressions and can be used in strand formation
 
