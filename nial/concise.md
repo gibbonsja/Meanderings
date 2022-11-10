@@ -184,7 +184,7 @@ returns
 	
  
  
-## Operator Application (*op-exp*)
+## Operator Application
  
     opn x                                operator application
     x := y                               assignment, same as: x gets y
