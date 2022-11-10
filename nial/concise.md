@@ -430,9 +430,38 @@ If you prefer a non-tacit style then you can write
 
 ## Curious Casts
 
+In Nial you can can a have vector of operations, the atlas, but this is not a data array its an operaor.
+
+However you can, using a cast, put a data representation of an operator in a data array and subsequently invoke
+that operator using the *apply* operator. So **opn x'* is identical to *'(!opn) apply x'*.
+
+For example, lets create a strand
+
+    x := !sin !cos !ln !sqrt;
+
+This is a data array of 4 elements and we can use it
+
+    x eachleft apply 10  
+    
+    -0.544021 -0.839072 2.30259 3.16228
+    
+Since its a data array we can reshape it
+
+    (2 2 reshape x) eachleft apply 10
+
+    -0.544021 -0.839072
+      2.30259   3.16228
+
+and we can mix casts with other data
+
+    y := 1 2 3 !sin 4 5 6
+
+then use the array functions to manipulate this data
+
+    (3 pick y) apply (0 1 2 4 5 6 choose y)
 
 
-
+    0.841471 0.909297 0.14112 -0.756802 -0.958924 -0.279415
 
 
 

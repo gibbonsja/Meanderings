@@ -17,10 +17,12 @@ at [Nial WASM](https://niallang.github.io/NIAL_WASM).
 
 ## Nial Content
 
-- Some [simple examples of Nial](nial/examples.md)
-- An attempt at a [concise description of Nial](nial/concise.md), a work in progress
-- Some translations of [APL into Nial](nial/APL.md)
-- Alan Perlis' [*APL Idioms*](nial/perlis.md) in Nial
+These are works in progress:
+
+- [Simple examples of Nial](nial/examples.md)
+- [Condensed Nial](nial/concise.md), an attempt at a short description of Nial
+- [APL to Nial](nial/APL.md), mapping APL functions into Nial
+- [Alan Perlis' APL Idioms](nial/perlis.md) in Nial
 
 
 
