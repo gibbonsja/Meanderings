@@ -456,7 +456,8 @@ and we can mix casts with other data
 
     y := 1 2 3 !sin 4 5 6
 
-then use the array functions to manipulate this data
+then use the array functions for element selection, *pick* and *choose*, to 
+manipulate this data
 
     (3 pick y) apply (0 1 2 4 5 6 choose y)
 
