@@ -214,6 +214,9 @@ operate on the array of results of their children.
 
 ## Control Expressions
 
+Nial has the standard control forms  and each returns the value of the last
+expression in the appropriate expression sequence.
+
     if exp then exp-seq elseif exp then exp-seq else exp-seq end
     for var with exp do exp-seq end
     while exp do exp-seq end
@@ -463,6 +466,3 @@ manipulate this data
 
 
     0.841471 0.909297 0.14112 -0.756802 -0.958924 -0.279415
-
-
-
