@@ -21,3 +21,23 @@ This is a translation, and homage, of Roger Hui's *APL in 16 Expressions* into N
 - Functions apply to entire arrays, as in, for example, +(x>100) to compute the
    number of elements of vector x greater than 100 .
 - A simple function precedence (“left to right”).
+
+
+
+# 1. On Average
+
+         avg is /[+,tally]
+     
+         x := floor (10*random 20)
+    7 4 3 9 1 3 9 4 5 3 6 1 8 7 8 8 1 4 8 0
+
+        avg x
+    4.95
+
+
+- Nial does not distinguish between infix and prefix use of a
+   function, *x fn y* is identical to *fn[x,y]*
+- *fn1 fn2* is the composition of two functions
+- *[fn1, fn2, ...] is a function called an atlas ( a list of functions) where
+   *[fn1,fn2, ...] x* is just *[fn1 x, fn2 x, ...]*
+
