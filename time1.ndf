@@ -1,22 +1,28 @@
 
+index_of is eachleft find [1 raise first, 1 raise second];
+
 
 time1 is op n m p q {
   % setup;
-  x := floor (p*random m);
-  y := (3 * tell q) choose x;
+  x := p p reshape floor (20*random (p*p));
+  y := q p reshape floor (20*random (p*q));
+  write '** Matrix x:';
+  write x;
+  write ' ';
+  write '** Matrix y';
   write y;
   write '----------------------------';
   % part 1;
   t0 := nano_time 0;
   i := n;
   while i > 0 do
-    r1 := (mix (x eachleft match x)) inner[and,eachboth =] (transpose mix (y eachleft match x));
+    r1 := x inner[and,eachboth =] (transpose y);
     i := i - 1;
   end;
   t1 := (nano_time 0)-t0;
   write 'part 1';
   write t1;
-  write shape r1;
+  write r1;
   write '----------------------------';
   %part 2;
   t0 := nano_time 0;
@@ -29,7 +35,7 @@ time1 is op n m p q {
   t2 := (nano_time 0) - t0;
   write 'part 2';
   write t2;
-  write shape r2;
+  write r2;
   write '----------------------------';
   write (t1/t2);
   write (r1 = r2);

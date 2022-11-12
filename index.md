@@ -21,7 +21,9 @@ These are works in progress:
 
 - [Simple examples of Nial](nial/examples.md)
 - [Condensed Nial](nial/concise.md), an attempt at a short description of Nial
+- [APL to Nial](nial/APL.md), mapping APL functions into Nial
 - [Alan Perlis' APL Idioms](nial/perlis.md) in Nial
+- [16 Expressions in Nial](nial/hui16.md)
 
 
 

@@ -35,20 +35,28 @@ This is a translation, and homage, of Roger Hui's *APL in 16 Expressions* into N
     4.95
 
 
-- Nial does not distinguish between infix and prefix use of a
-   function, *x fn y* is identical to *fn[x,y]*
-- *fn1 fn2* is the composition of two functions
-- *[fn1, fn2, ...] is a function called an atlas ( a list of functions) where
-   *[fn1,fn2, ...] x* is just *[fn1 x, fn2 x, ...]*
-
 
 2. Index-Of Selfie
 
-    x eachleft find x
+Dyalog APL has multiple meanings for iota (⍳) depending on the arguments in both the
+monadic and dyadic contexts.
 
-    % nub (unique);
-    ((x eachleft find x) eachboth = tell shape x) sublist x
-    
-    (x⍳x)∘.=(x⍳y)		an efficient computation for x∧.=⍉y for matrices x and y
-    (x⍳x)∘.=(x⍳y)		an efficient computation for x∘.≡y for non-simple vector x
-    (x⍳x) f⌸ y		equivalent to x f⌸ y
+For this section the closest definition is
+
+    index_of is eachleft find [1 raise first, 1 raise second]
+
+-  nub (unique)
+
+    ((x index_of x) eachboth = tell shape x) sublist x
+
+-  an efficient alternative to *x inner [and,=] transpose y* for two arrays x and y
+
+    (x index_of x) outer = (y index_of x)
+
+-  an efficient computation for *x outer match y* for non-simple vector x
+
+    (x index_of x) outer = (y index_of x)
+
+-  equivalent to x bykeys f y
+
+    (x index_of x) bykeys f y		
