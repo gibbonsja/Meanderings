@@ -36,7 +36,7 @@ This is a translation, and homage, of Roger Hui's *APL in 16 Expressions* into N
 
 
 
-2. Index-Of Selfie
+# 2. Index-Of Selfie
 
 Dyalog APL has multiple meanings for iota (⍳) depending on the arguments in both the
 monadic and dyadic contexts.
@@ -57,6 +57,54 @@ For this section the closest definition is
 
     (x index_of x) outer = (y index_of x)
 
--  equivalent to x bykeys f y
+-  equivalent to *x bykeys f y*
 
-    (x index_of x) bykeys f y		
+    (x index_of x) bykeys f y
+    
+
+3. Inverted Table Index-Of
+ 	
+
+   tx                 ty                  ty index_of tx
+┌──────┬─┬───┬──┐  ┌──────┬─┬───┬──┐   3 1 5 2 5 5
+│John  │M│USA│26│  │Min   │F│CN │17│
+├──────┼─┼───┼──┤  ├──────┼─┼───┼──┤      tx index_of tx
+│Mary  │F│UK │24│  │Mary  │F│UK │24│   0 1 2 3 4
+├──────┼─┼───┼──┤  ├──────┼─┼───┼──┤
+│Monika│F│DE │31│  │John  │M│UK │26│      ty index_of ty
+├──────┼─┼───┼──┤  ├──────┼─┼───┼──┤   0 1 2 3 4 4
+│Min   │F│CN │17│  │Monika│F│DE │31│
+├──────┼─┼───┼──┤  ├──────┼─┼───┼──┤
+│Max   │M│IT │29│  │Mesut │M│DE │24│
+└──────┴─┴───┴──┘  ├──────┼─┼───┼──┤
+                   │Mesut │M│DE │24│
+                   └──────┴─┴───┴──┘
+
+
+# 4. Bar Chart
+ 	
+
+   x := 3 1 4 1 5 9 
+
+
+   '.⎕'[x outer > ⍳⌈/x]
+   
+⎕⎕⎕......
+⎕........
+⎕⎕⎕⎕.....
+⎕........
+⎕⎕⎕⎕⎕....
+⎕⎕⎕⎕⎕⎕⎕⎕⎕
+ 	
+
+   ⍳ ⌈/x
+0 1 2 3 4 5 6 7 8
+
+   x ∘.> ⍳⌈/x
+1 1 1 0 0 0 0 0 0
+1 0 0 0 0 0 0 0 0
+1 1 1 1 0 0 0 0 0
+1 0 0 0 0 0 0 0 0
+1 1 1 1 1 0 0 0 0
+1 1 1 1 1 1 1 1 1
+            — K.W. Smillie, STATPACK, University of Alberta, 1968.

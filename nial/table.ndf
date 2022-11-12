@@ -1,0 +1,9 @@
+tx := ["John "Mary "Monika "Min "Max,
+       "M "F "F "F "M,
+       "USA "UK "DE "CN "IT,
+       26 24 31 17 29];
+
+ty := ["Min "Mary "John "Monika "Mesut "Mesut,
+       "F "F "M "F "M "M,
+       "CN "UK "UK "DE "DE "DE,
+       17 24 26 31 24 24];
