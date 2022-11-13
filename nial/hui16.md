@@ -102,8 +102,9 @@ Attributed to K.W. Smillie, STATPACK, University of Alberta, 1968.
 
     x := 3 1 4 1 5 9 
 
-
-    (0+(x eachleft > tell max x)) choose ('.' '⎕')
+    puts is op s { writefile 1 s l}
+    
+    (0+(x eachleft > tell max x)) eachleft (puts link choose) ('.' '⎕');
    
     ⎕⎕⎕......
     ⎕........
