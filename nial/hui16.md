@@ -62,7 +62,7 @@ For this section the closest definition is
     (x index_of x) bykeys f y
     
 
-3. Inverted Table Index-Of
+# 3. Inverted Table Index-Of
  	
 
        tx             
