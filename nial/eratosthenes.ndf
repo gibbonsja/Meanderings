@@ -1,0 +1,27 @@
+#eratosthenes is op n {
+  nums := 2 + tell (n - 1);
+  primes := [];
+  while not empty nums do
+    p := first nums;
+    primes := primes append p;
+    nums := (not (nums mod p match 0)) sublist nums;
+  end;
+  primes
+}
+
+#write eratosthenes 70;
+
+
+eratos is op n {
+  nums := 2 + tell (n - 1);
+  primes := [];
+  while not empty nums do
+    nums := (not (nums mod (p:= first nums) match 0)) sublist nums;
+    primes := primes append p
+  end
+}
+
+; write eratos 70;
+
+
+prime_pairs is sublist [(-2 match) -, pack] [-1 drop, 1 drop ] eratos

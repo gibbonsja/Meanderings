@@ -78,16 +78,15 @@ For this section the closest definition is
     │Max   │M│IT │29│ 
     └──────┴─┴───┴──┘  
                  
-                   
 
-       ty                  ty index_of tx
-    ┌──────┬─┬───┬──┐   3 1 5 2 5 5
+       ty              
+    ┌──────┬─┬───┬──┐  
     │Min   │F│CN │17│
-    ├──────┼─┼───┼──┤      tx index_of tx
-    │Mary  │F│UK │24│   0 1 2 3 4
+    ├──────┼─┼───┼──┤     
+    │Mary  │F│UK │24│  
     ├──────┼─┼───┼──┤
-    │John  │M│UK │26│      ty index_of ty
-    ├──────┼─┼───┼──┤   0 1 2 3 4 4
+    │John  │M│UK │26│     
+    ├──────┼─┼───┼──┤  
     │Monika│F│DE │31│
     ├──────┼─┼───┼──┤
     │Mesut │M│DE │24│
@@ -95,10 +94,23 @@ For this section the closest definition is
     │Mesut │M│DE │24│
     └──────┴─┴───┴──┘
 
+        ty index_of tx
+    3 1 5 2 5 5
+    
+        tx index_of tx
+    0 1 2 3 4
+
+        ty index_of ty
+    0 1 2 3 4 4
+
 
 # 4. Bar Chart
  	
 Attributed to K.W. Smillie, STATPACK, University of Alberta, 1968.
+
+Dyalog uses UTF-16 unicode whereas Nial currently uses UTF8 with byte chars so direct
+indexing of chars is not possible. So we index strings instead and concatenate
+them with *link*.
 
     x := 3 1 4 1 5 9 
 
