@@ -1,0 +1,51 @@
+loaddefs "nobj;
+
+# Create a base prototype
+
+specimen := _objclone ["legs 0, "eyes 2, "environment "land, "name "none] null;
+
+# Create a method to describe any specimen
+
+describe_specimen is op self args {
+  write '-------';
+  t := _objbase _objlevel self;
+  for n with _getkeys t do
+    v := t _tget n;
+    if atomic v then
+      write link each string n ': ' v;
+    end;
+  end;
+end;
+
+specimen _objset "describe !describe_specimen;
+
+
+# Create more specimens
+
+write '';
+write '';
+write '** first pass';
+  
+human := _objclone ["name "human, "legs 2, "iq "hmm] specimen;
+fish  := _objclone ["name "fish, "environment "water] specimen;
+octopus := _objclone ["name "octopus, "legs 8, "environment "water] specimen;
+
+# Invoke the method directly
+
+"describe _objsend human []; 
+"describe _objsend fish []; 
+"describe _objsend octopus [];
+
+# Make the method look better
+
+describe is ("describe _objsend);
+
+write '';
+write '';
+write '** Second pass';
+ 
+describe human []; 
+describe fish []; 
+describe octopus [];
+
+bye

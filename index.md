@@ -26,6 +26,10 @@ These are works in progress:
 - [16 Expressions in Nial](nial/hui16.md)
 
 
+## Nial Source
+
+- [Nial OO](source/nobj.ndf) a small prototype base object system
+- [Nial OO Example](source/nobjexample.ndf) a small test
 
 
 

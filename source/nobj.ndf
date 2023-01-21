@@ -1,0 +1,114 @@
+# --------------------------------------------------
+# nobj - a very simple small prototype based object
+#        system for Nial based on hash tables
+#
+# Objects are represented as a pair consisting of
+#
+#   1. a hash table of attribute/value pairs where
+#      the attributes are phrases
+#   2. a parent object for inheritance
+#
+# Object methods are attribute/value pairs where the
+# value is a cast of a function 'fn' of the form
+#
+#       attr fn [obj,additional_args]
+#
+# The availabe operators are
+#
+#   _objclone [attr/value pair, ...]  parent
+#   _objset obj attr_value_pair
+#   _objget obj attr
+#   _objsend method_name [obj, method_args]
+#   _objlevel obj
+#   
+# ---------------------------------------------------
+
+# Encapsulate definition for changes
+
+_objbase is first;
+_objparent is second;
+
+
+# _objclone attributes parent
+# ---------------------------
+#
+# Create a new object by cloning a parent object and
+# adding additional attribute/value pairs
+#
+
+_objclone is op obj_attrs obj_parent {
+  ctr := _tcreate 1;
+  ctr eachright _tset obj_attrs;
+  [ctr, obj_parent]
+}
+
+
+# _objset obj [attr, val]
+# obj _objset attr val
+# -----------------------
+#
+# Set or add the value of an attribute in the object
+#
+
+_objset is op obj kvp (_objbase obj _tset kvp);
+
+
+# _objget obj attr
+#
+# Get the value of an attribute of an object. If the attribute
+# does not exist then return the phrase "__noent__
+#
+# The function will search the object first and then the list of
+# ancestors to find the attribute.  
+
+_objget is op obj k {
+  v := (_objbase obj) _tget [k, "__noent__];
+  if v = "__noent__ and (_objparent obj ~= null) then
+    v := _objparent obj _objget k;
+  end;
+  v
+}
+
+
+# -------------- Methods ---------------
+
+# _objsend method [obj, args]
+# method _objsend obj args
+#
+# Method call on a nominated object with arguments
+#
+# method - an attribute name whose value is a cast of an
+#          operator(fn) of the form  'obj fn args' 
+# obj    - an object with an attribute 'method'
+# args   - an arbitrary array argument  
+#
+
+_objsend is op methd oargs {
+  obj args := oargs;
+  (obj _objget methd) apply oargs
+}
+
+
+# --------------- Support Routines -----------
+
+
+# _objlevel obj
+# ---------------
+#
+# Flatten an object hierachy into a single level
+#
+
+_objlevel is op obj {
+  if obj = null then
+    [_tcreate 1,null]
+  else
+    base := _objbase obj;
+    newobj := _objlevel _objparent obj;
+    keys := _getkeys base;
+    vals := base eachright _tget keys;
+    newobj eachright _objset (keys pack vals);
+    newobj
+  end
+}
+
+
