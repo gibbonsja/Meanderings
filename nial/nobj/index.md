@@ -3,7 +3,7 @@ title: "A Very Simple Object System for Nial"
 ---
 
 The source code can be found in the file [nobj.ndf](nobj.ndf) and a 
-small example/test in the file [nobjexample.ndf](nobj.ndf).
+small example/test in the file [nobjexample.ndf](nobjexample.ndf).
 
 # Overview
 
@@ -17,9 +17,9 @@ Objects are represented as a pair consisting of
 2. a parent object for inheritance
 
 Attribute lookups start in the base table and if not found then
-the ancestor tables are recursively searched.
+the successive ancestor tables are recursively searched.
 
-Object methods are attribute/value pairs where the
+Object methods are implemented as attribute/value pairs where the
 value is a cast of a function *fn* of the form
 
     attr fn [obj,additional_args]
@@ -32,7 +32,9 @@ There are two ways to create new objects:
    produces a new object whose parent is the existing object
 2. flatten an existing object which produces an object with no parent
    whose attributes are an amalgamation of the attributes of the 
-   existing object
+   whole hierarchy in such a way that the objects behaviour remains 
+   the same.
+   
 
 To clone an existing object you use the function
 
@@ -60,7 +62,9 @@ To get the current value of an attribute for an object use the function
     _objget obj attr
 
 which first searches the base table for the attribute and if not found will 
-try to find the attribute in parent and so on.
+try to find the attribute in its parent and so on.
+
+If no attribute is found it returns the phrase *"__noent__*.
 
 
 # Invoking Methods
