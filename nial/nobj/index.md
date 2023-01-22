@@ -57,6 +57,13 @@ object use the following function
 In both cases the new attribute and value will be in the base table
 even if the old attribute is in some ancestor.
 
+You can tidy the code up a bit using currying. If you gave an attribute 
+*"nose* then you can write a setter as
+
+    set_nose is ("node _objset2)
+
+which uses the additional function *_objset2*.
+    
 To get the current value of an attribute for an object use the function
 
     _objget obj attr
@@ -64,7 +71,11 @@ To get the current value of an attribute for an object use the function
 which first searches the base table for the attribute and if not found will 
 try to find the attribute in its parent and so on.
 
-If no attribute is found it returns the phrase *"__noent__*.
+Again you can use currying to write a getter
+
+    get_nose is ("nose converse _objget)
+
+If no attribute is found it returns the phrase *"\_\_noent\_\_*.
 
 
 # Invoking Methods
@@ -78,5 +89,16 @@ To invoke a method use the function
 
 This will look up the method name to get the function cast and then
 apply the cast to the arguments *[obj,args]*.
+
+For cleaner looking code you can use currying e.g. if you have a method
+with the name "describe in an object then can write
+
+    describe is ("describe _objsend);
+
+creating a pseudo generic function which can then be used as
+
+    describe obj args
+	
+for any object.
 
 
