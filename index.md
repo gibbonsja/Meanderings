@@ -28,8 +28,7 @@ These are works in progress:
 
 ## Nial Source
 
-- [Nial OO](source/nobj.ndf) a small prototype base object system
-- [Nial OO Example](source/nobjexample.ndf) a small test
+- [NOBJ](nial/nobj/index.md) a small prototype base object system for Nial
 
 
 
