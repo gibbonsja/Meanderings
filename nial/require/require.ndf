@@ -1,0 +1,87 @@
+# Define and initialise global variables once, avoiding the
+# problem of multiple loaddefs resetting globals
+
+_def_once is op vname val {
+    triggerval := settrigger o;
+    if (value vname) = (fault '?invalid name') then
+         vname assign val;
+    end;
+    settrigger triggerval;
+}
+
+
+# ---------------- _require --------------------------
+# 
+# Provide a simple facility to load a file once. Loaddefs
+# can always be used to reload a file.
+#
+
+
+# Set up the search path for required modules from the
+# initial library path and an optional environment
+# variable.
+#
+# NOTE: we only do this once based on the existence of the
+#       variable _loaded_Require_Files
+
+if (value "_loaded_required_files) = (fault '?no_value') then
+  _loaded_required_files := _tcreate 1; 
+  _requireLibs := ['.', makefilepath (getenv 'Nialroot')  'niallib'];
+  _extralibs := getenv 'NIAL_LIBPATH';
+  if not empty _extralibs then
+    _requireLibs := _requireLibs link ((first os_path_separator match _extralibs) cut _extralibs);
+  end;
+end;
+
+
+# _require module option
+# ----------------------
+#
+# This uses a hash table to hold the details of loaded modules
+
+_require is op arg {
+  if tally arg = 2 and not isstring arg THEN
+    filename mode := arg;
+  else
+    filename := arg;
+    mode := false;
+  end;
+  % turn off fault triggering in case the loaddefs faults;
+  Svtrigger := settrigger False;
+  libs := _requireLibs;
+  found := false;
+  while not found and not empty Libs DO
+    Libtotry Libs := [first,rest] Libs;
+    path_to_file := makefilepath Libtotry (string Filename);
+    % Add the .ndf extension if not present;
+    if tolower (-4 take path_to_file) ~= '.ndf' then
+      path_to_file := path_to_file link '.ndf';
+    end;
+    % Get the OS full pathname to uniquely identify the file;
+    fpn := fullpathname path_to_file;
+    if not empty fpn then
+      found := true;
+      % Check if already loaded;
+      if not (_loaded_required_files _tget fpn o) then
+        res := loaddefs fpn mode;
+        if res = ??noexpr then
+          _loaded_required_files _tset fpn l;
+        end
+      else
+        res := ??noexpr;
+      end;
+    end;
+  end;
+  settrigger Svtrigger;
+  Res }
+
+
+# add a simple name that can easily be redefined by user code
+
+require is _require;
+
+
+# _required_files
+
+_required_files is (_getkeys _loaded_required_files);
+

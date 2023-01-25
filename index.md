@@ -29,7 +29,7 @@ These are works in progress:
 ## Nial Source
 
 - [NOBJ](nial/nobj/index.md) a small prototype base object system for Nial
-
+- [Require](nial/require/index.md) a wrapper around *loaddefs* that avoids multiple loads of a file
 
 
 
