@@ -15,7 +15,7 @@ Some early papers that I have been able to collect on Nial and Array Theory.
 
 # Array Theory
 
-- [More T - MoA-Psi_ArrayTheory](MoA-Psi_ArrayTheory.pdf)
+- [More T - A Comparison of Array Theory and a Mathematics of Arrays](MoA-Psi_ArrayTheory.pdf)
 - [More T - An Array Theoretic Look Beyond APL2 and Nial](An Array Theoretic Look Beyond APL2 and Nial.pdf)
 - [More T - Nested Rectangular Array](Nested Rectangular Array.pdf)
 - [More T - Rectangularly Arranged Collections of Collections](Rectangularly Arranged Collections of Collections.pdf)
