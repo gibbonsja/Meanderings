@@ -7,7 +7,7 @@ Some early papers that I have been able to collect on Nial and Array Theory.
 
 # Nial
 
-- [McCrosky,C Glasgow,J and Jenkins,M - Nial  A Candidate Language for 5th Generation Computer Systems](McCrosky1_5th_Gen.pdf)
+- [McCrosky,C Glasgow,J and Jenkins,M - Nial  A Candidate Language for 5th Generation Computer Systems](McCrosky_5th_Gen.pdf)
 - [Jenkins M - Array Theory and the Design of Nial](Jenkins_Design_of_Nial.pdf)
 - [Jenkins M - A Development System for Testing Array Theory Concepts](Jenkins_Testing_Array_Theory_Concepts.pdf)
 - [Smith T - The Nial Programming Language Revisited](Smith_Nial_Language_Revisited.md)
