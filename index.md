@@ -31,6 +31,9 @@ These are works in progress:
 - [NOBJ](nial/nobj/index.md) a small prototype base object system for Nial
 - [Require](nial/require/index.md) a wrapper around *loaddefs* that avoids multiple loads of a file
 
+## Historical Material
+
+- [Papers](nial/archives/index.md)
 
 
 
