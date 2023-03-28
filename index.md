@@ -15,7 +15,7 @@ under a GPL3 licence. For details go to [Nial Website](https://nial-array-langua
 There is also an evolving Web Assembly version available
 at [Nial WASM](https://niallang.github.io/NIAL_WASM).
 
-## Nial Content
+# Nial Content
 
 These are works in progress:
 
@@ -34,6 +34,13 @@ These are works in progress:
 ## Historical Material
 
 - [Papers](nial/archives/index.md)
+
+# Small Projects
+
+- [M4 J-Incanabulum](projects/m4_incanabulum/index.md) A version of Arthur Whitney's J Incanabulum using the GNU m4 macro processor 
+
+
+
 
 
 
