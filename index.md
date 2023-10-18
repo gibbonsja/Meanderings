@@ -26,6 +26,12 @@ These are works in progress:
 - [16 Expressions in Nial](nial/hui16.md)
 
 
+## Nial Explorations
+
+This is a series of meanderings through parts of Nial.
+
+
+
 ## Nial Source
 
 - [NOBJ](nial/nobj/index.md) a small prototype base object system for Nial
