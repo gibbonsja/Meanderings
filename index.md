@@ -27,12 +27,10 @@ These are works in progress:
 
 ## Notes on Nial
 
-1. [Eval/Parse/Scan](notes/non1.md)
-
-## Nial Explorations
-
 This is a series of meanderings through parts of Nial.
 
+
+1. [Eval/Parse/Scan](notes/non1.md)
 
 
 ## Nial Source
