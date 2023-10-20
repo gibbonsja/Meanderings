@@ -29,6 +29,12 @@ These are works in progress:
 
 1. [Eval/Parse/Scan](notes/non1.md)
 
+## Nial Explorations
+
+This is a series of meanderings through parts of Nial.
+
+
+
 ## Nial Source
 
 - [NOBJ](nial/nobj/index.md) a small prototype base object system for Nial
