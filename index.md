@@ -25,6 +25,9 @@ These are works in progress:
 - [Alan Perlis' APL Idioms](nial/perlis.md) in Nial
 - [16 Expressions in Nial](nial/hui16.md)
 
+## Notes on Nial
+
+1. [Eval/Parse/Scan](notes/non1.md)
 
 ## Nial Source
 
